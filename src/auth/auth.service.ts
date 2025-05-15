@@ -8,6 +8,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from './dto/CreateUserDto';
+import { ValidateTokenDto } from './dto/ValidateTokenDto';
+import { UserPayload, ValidationResponse } from './models/UserPayload.model';
 
 @Injectable()
 export class AuthService {
@@ -53,5 +55,25 @@ export class AuthService {
     const user = await this.userModel.findOne({ email });
     if (!user) return null;
     return user;
+  }
+
+  async validateToken(
+    tokenRequest: ValidateTokenDto,
+  ): Promise<ValidationResponse> {
+    try {
+      const payload: UserPayload = await this.jwtService.verifyAsync(
+        tokenRequest.token,
+      );
+      return {
+        status: !!(payload && payload.sub && payload.email),
+      };
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      console.error('Invalid token:', errorMessage);
+      return {
+        status: false,
+      };
+    }
   }
 }

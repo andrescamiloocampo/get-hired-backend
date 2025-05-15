@@ -1,4 +1,14 @@
-import { Controller, Req, Get, UseGuards, Res } from '@nestjs/common';
+import { ValidationResponse } from './models/UserPayload.model';
+import { ValidateTokenDto } from './dto/ValidateTokenDto';
+import {
+  Controller,
+  Req,
+  Get,
+  UseGuards,
+  Res,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GoogleOauthGuard, JwtAuthGuard } from './utils/Guards';
 import { Response } from 'express';
@@ -7,11 +17,11 @@ import { Response } from 'express';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Get('google')
+  @Get('google/login')
   @UseGuards(GoogleOauthGuard)
   async auth() {}
 
-  @Get('google/redirect')
+  @Get('google/callback')
   @UseGuards(GoogleOauthGuard)
   async googleAuthCallback(@Req() req, @Res() res: Response) {
     const token = await this.authService.signIn(req.user);
@@ -21,8 +31,14 @@ export class AuthController {
       secure: false,
     });
 
-    // return res.redirect('http://localhost:3000/api');
-    return res.json({ token });
+    return res.redirect(`http://localhost:4200/login?token=${token}`);
+  }
+
+  @Post('validate')
+  async validateToken(
+    @Body() body: ValidateTokenDto,
+  ): Promise<ValidationResponse> {
+    return await this.authService.validateToken(body);
   }
 
   @Get('protected')
