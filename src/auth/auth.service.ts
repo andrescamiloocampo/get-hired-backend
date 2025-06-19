@@ -39,7 +39,6 @@ export class AuthService {
 
   async registerUser(user: CreateUserDto) {
     try {
-      console.log('User', user);
       const newUser = await this.userModel.create(user);
       return this.generateJwt({
         sub: newUser._id.toString(),
@@ -51,7 +50,6 @@ export class AuthService {
   }
 
   async findUserByEmail(email: string) {
-    console.log('Email:', email);
     const user = await this.userModel.findOne({ email });
     if (!user) return null;
     return user;
