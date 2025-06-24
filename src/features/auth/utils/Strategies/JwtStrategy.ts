@@ -2,10 +2,12 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
-import { Console } from 'console';
 import { Model } from 'mongoose';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { User, UserDocument } from 'src/schema/user.schema';
+import {
+  User,
+  UserDocument,
+} from '@/features/user-management/schema/user.schema';
 
 export interface JwtPayload {
   sub: string;

@@ -1,15 +1,15 @@
-import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { GoogleStrategy } from './utils/GoogleStrategy';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard } from '@nestjs/throttler';
-import { AuthService } from './auth.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from 'src/schema/user.schema';
-import { SessionSerializer } from './utils/Serializer';
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './utils/JwtStrategy';
+import { AuthController } from './controllers/auth.controller';
+import { AuthService } from './services/auth.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GoogleStrategy } from './utils';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './utils/Strategies/JwtStrategy';
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { SessionSerializer } from './utils/Serializers/Serializer';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { User, UserSchema } from '../user-management/schema/user.schema';
 
 @Module({
   imports: [

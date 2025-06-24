@@ -1,5 +1,5 @@
-import { ValidationResponse } from './models/UserPayload.model';
-import { ValidateTokenDto } from './dto/ValidateTokenDto';
+import { ValidationResponse } from '../types/UserPayload.model';
+import { ValidateTokenDto } from '../models/dto';
 import {
   Controller,
   Req,
@@ -9,8 +9,8 @@ import {
   Post,
   Body,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { GoogleOauthGuard, JwtAuthGuard } from './utils/Guards';
+import { AuthService } from '../services/auth.service';
+import { GoogleOauthGuard, JwtAuthGuard } from '../utils';
 import { Response } from 'express';
 
 @Controller('auth')

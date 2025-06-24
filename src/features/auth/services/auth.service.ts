@@ -1,4 +1,7 @@
-import { User, UserDocument } from 'src/schema/user.schema';
+import {
+  User,
+  UserDocument,
+} from '@/features/user-management/schema/user.schema';
 import {
   BadRequestException,
   Injectable,
@@ -7,9 +10,9 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from './dto/CreateUserDto';
-import { ValidateTokenDto } from './dto/ValidateTokenDto';
-import { UserPayload, ValidationResponse } from './models/UserPayload.model';
+import { CreateUserDto } from '../models/dto/CreateUserDto';
+import { ValidateTokenDto } from '../models/dto/ValidateTokenDto';
+import { UserPayload, ValidationResponse } from '../types/UserPayload.model';
 
 @Injectable()
 export class AuthService {

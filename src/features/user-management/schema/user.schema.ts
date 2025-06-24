@@ -29,6 +29,9 @@ export class User {
 
   @Prop({ required: false })
   role: Role;
+
+  @Prop({ required: false, default: false })
+  enrolled: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

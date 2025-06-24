@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { ConfigService } from '@nestjs/config';
-import { AuthService } from '../auth.service';
-import { User } from 'src/schema/user.schema';
+import { AuthService } from '../../services/auth.service';
+import { User } from '@/features/user-management/schema/user.schema';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
@@ -44,6 +44,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       givenName: `${name?.givenName}`,
       picture: photos?.[0].value ?? '',
       role: 'user',
+      enrolled: false,
     };
 
     done(null, user);
