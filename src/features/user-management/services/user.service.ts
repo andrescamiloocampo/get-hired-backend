@@ -16,4 +16,9 @@ export class UserService {
     const user = await this.userModel.findOne({ email });
     return user;
   }
+
+  async getEnrollmentStatus(id: string): Promise<boolean | null> {
+    const user = await this.userModel.findOne({ _id: id });
+    return user ? user.enrolled : null;
+  }
 }

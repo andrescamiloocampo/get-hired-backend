@@ -1,4 +1,10 @@
-import { IsEmail, IsNotEmpty, IsString, IsMongoId } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsString,
+  IsMongoId,
+  IsBoolean,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsMongoId()
@@ -24,4 +30,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   picture: string;
+
+  @IsBoolean()
+  enrolled: boolean = false;
 }

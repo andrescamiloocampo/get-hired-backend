@@ -22,7 +22,7 @@ import { UsersModule } from './features/user-management/users.module';
       throttlers: [
         {
           ttl: 60000,
-          limit: 30,
+          limit: 3000,
         },
       ],
     }),
